@@ -370,7 +370,7 @@ This project is open source and available for use.
 
 For issues, questions, or suggestions:
 
-- 📞 WhatsApp: +237 612 345 678
+- 📞 WhatsApp: +237 672794019
 - 📧 Email: info@buildcam.cm
 - 💬 Create an issue on GitHub
 
