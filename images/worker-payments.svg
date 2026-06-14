@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff" />
+      <stop offset="100%" stop-color="#f5f5f5" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4562a" />
+      <stop offset="100%" stop-color="#1a1a1a" />
+    </linearGradient>
+    <linearGradient id="mtnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc00" />
+      <stop offset="100%" stop-color="#ff9900" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGrad)" stroke="#ddd" stroke-width="2" />
+  
+  <!-- Abstract Design Element -->
+  <path d="M 30,120 A 70,70 0 0,1 170,120 Z" fill="url(#primaryGrad)" opacity="0.1" />
+
+  <!-- Hand Holding Smartphone -->
+  <rect x="75" y="70" width="50" height="90" rx="8" fill="#2c3e50" stroke="#7f8c8d" stroke-width="2" />
+  <!-- Phone Screen -->
+  <rect x="80" y="78" width="40" height="74" rx="4" fill="#34495e" />
+  
+  <!-- Checkmark/Success screen on phone -->
+  <circle cx="100" cy="105" r="14" fill="#2ecc71" />
+  <path d="M 94,105 L 98,109 L 107,99" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" />
+  <rect x="88" y="127" width="24" height="6" rx="2" fill="#fff" opacity="0.3" />
+  
+  <!-- Mobile Money Circles floating -->
+  <circle cx="50" cy="85" r="18" fill="url(#mtnGrad)" stroke="#ff9900" stroke-width="1" />
+  <text x="50" y="90" font-size="12" font-weight="900" fill="#fff" text-anchor="middle" font-family="Impact, sans-serif">MoMo</text>
+  
+  <circle cx="150" cy="95" r="18" fill="#e67e22" stroke="#d35400" stroke-width="1" />
+  <text x="150" y="100" font-size="12" font-weight="900" fill="#fff" text-anchor="middle" font-family="Arial Black, sans-serif">OM</text>
+
+  <!-- Finger touching screen -->
+  <path d="M 115,130 C 115,120 130,120 130,130 L 130,150 L 115,150 Z" fill="#f5cba7" />
+  <path d="M 110,145 L 140,145 L 140,170 C 140,175 110,175 110,170 Z" fill="#f5cba7" />
+</svg>

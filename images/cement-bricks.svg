@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5f5f5"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <!-- Concrete block gradients -->
+    <linearGradient id="blockTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b8b8b8"/>
+      <stop offset="40%" stop-color="#a8a8a8"/>
+      <stop offset="100%" stop-color="#9a9a9a"/>
+    </linearGradient>
+    <linearGradient id="blockFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#999"/>
+      <stop offset="30%" stop-color="#8e8e8e"/>
+      <stop offset="70%" stop-color="#858585"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+    <linearGradient id="blockRight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8a8a8a"/>
+      <stop offset="50%" stop-color="#808080"/>
+      <stop offset="100%" stop-color="#757575"/>
+    </linearGradient>
+    <!-- Darker block variants -->
+    <linearGradient id="blockTopDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a8a8a8"/>
+      <stop offset="100%" stop-color="#909090"/>
+    </linearGradient>
+    <linearGradient id="blockFrontDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a8a8a"/>
+      <stop offset="100%" stop-color="#707070"/>
+    </linearGradient>
+    <linearGradient id="blockRightDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7a7a7a"/>
+      <stop offset="100%" stop-color="#686868"/>
+    </linearGradient>
+    <!-- Concrete texture filter -->
+    <filter id="concreteTexture" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="4" seed="3" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="soft-light"/>
+    </filter>
+    <!-- Shadow -->
+    <filter id="stackShadow" x="-10%" y="-5%" width="130%" height="130%">
+      <feDropShadow dx="4" dy="8" stdDeviation="10" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <filter id="groundShadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feGaussianBlur stdDeviation="16"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.2 0"/>
+    </filter>
+    <!-- Hole shadow -->
+    <radialGradient id="holeShadow" cx="0.5" cy="0.3" r="0.5">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="70%" stop-color="#606060"/>
+      <stop offset="100%" stop-color="#757575"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="260" cy="440" rx="200" ry="35" filter="url(#groundShadow)" fill="#555"/>
+
+  <!-- BLOCK STACK - 3D Isometric-ish view -->
+  <g filter="url(#stackShadow)">
+
+    <!-- ===== BOTTOM ROW (Row 1) - 3 blocks ===== -->
+    <!-- Block 1-1 (left) -->
+    <g filter="url(#concreteTexture)">
+      <!-- Front face -->
+      <path d="M 70,360 L 200,360 L 200,410 L 70,410 Z" fill="url(#blockFront)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <!-- Top face -->
+      <path d="M 70,360 L 105,335 L 235,335 L 200,360 Z" fill="url(#blockTop)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <!-- Right face -->
+      <path d="M 200,360 L 235,335 L 235,385 L 200,410 Z" fill="url(#blockRight)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <!-- Front holes -->
+      <rect x="95" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="130" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="165" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- Block 1-2 (middle) -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 200,360 L 330,360 L 330,410 L 200,410 Z" fill="url(#blockFrontDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 200,360 L 235,335 L 365,335 L 330,360 Z" fill="url(#blockTopDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 330,360 L 365,335 L 365,385 L 330,410 Z" fill="url(#blockRightDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="225" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="260" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="295" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- Block 1-3 (right, slightly behind) -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 330,360 L 430,360 L 430,410 L 330,410 Z" fill="url(#blockFront)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 330,360 L 365,335 L 465,335 L 430,360 Z" fill="url(#blockTop)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 430,360 L 465,335 L 465,385 L 430,410 Z" fill="url(#blockRight)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="350" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="385" y="370" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- ===== MIDDLE ROW (Row 2) - 2.5 blocks, offset ===== -->
+    <!-- Block 2-1 -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 100,310 L 250,310 L 250,360 L 100,360 Z" fill="url(#blockFrontDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 100,310 L 135,285 L 285,285 L 250,310 Z" fill="url(#blockTopDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 250,310 L 285,285 L 285,335 L 250,360 Z" fill="url(#blockRightDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="128" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="163" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="198" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- Block 2-2 -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 250,310 L 400,310 L 400,360 L 250,360 Z" fill="url(#blockFront)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 250,310 L 285,285 L 435,285 L 400,310 Z" fill="url(#blockTop)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 400,310 L 435,285 L 435,335 L 400,360 Z" fill="url(#blockRight)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="275" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="310" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="345" y="320" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- ===== TOP ROW (Row 3) - 2 blocks ===== -->
+    <!-- Block 3-1 -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 130,260 L 280,260 L 280,310 L 130,310 Z" fill="url(#blockFront)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 130,260 L 165,235 L 315,235 L 280,260 Z" fill="url(#blockTop)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 280,260 L 315,235 L 315,285 L 280,310 Z" fill="url(#blockRight)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="158" y="270" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="193" y="270" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="228" y="270" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- Block 3-2 -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 280,260 L 380,260 L 380,310 L 280,310 Z" fill="url(#blockFrontDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 280,260 L 315,235 L 415,235 L 380,260 Z" fill="url(#blockTopDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 380,260 L 415,235 L 415,285 L 380,310 Z" fill="url(#blockRightDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="302" y="270" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="337" y="270" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+
+    <!-- ===== SINGLE TOP BLOCK (Row 4) ===== -->
+    <g filter="url(#concreteTexture)">
+      <path d="M 180,210 L 330,210 L 330,260 L 180,260 Z" fill="url(#blockFrontDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 180,210 L 215,185 L 365,185 L 330,210 Z" fill="url(#blockTopDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <path d="M 330,210 L 365,185 L 365,235 L 330,260 Z" fill="url(#blockRightDark)" stroke="#6e6e6e" stroke-width="0.5"/>
+      <rect x="210" y="220" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="245" y="220" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+      <rect x="280" y="220" width="22" height="30" rx="2" fill="url(#holeShadow)"/>
+    </g>
+  </g>
+
+  <!-- Subtle edge highlights on top blocks -->
+  <line x1="180" y1="210" x2="330" y2="210" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <line x1="130" y1="260" x2="380" y2="260" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+</svg>

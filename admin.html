@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MAKIAS CONSTRUCTION Admin Dashboard.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Admin Dashboard - MAKIAS CONSTRUCTION</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin-container {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: calc(100vh - 80px);
+    }
+    .admin-sidebar {
+      background: var(--secondary-color);
+      color: white;
+      padding: 2rem 1rem;
+      border-right: 1px solid var(--border-color);
+    }
+    .admin-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .admin-tab {
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ccc;
+    }
+    .admin-tab:hover, .admin-tab.active {
+      background: var(--primary-color);
+      color: white;
+    }
+    .admin-main {
+      padding: 2rem;
+      background: var(--light-gray);
+    }
+    .admin-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .admin-content.active {
+      display: block;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--primary-color);
+    }
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--secondary-color);
+    }
+    .admin-card {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    table th, table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    table th {
+      background: #f8f9fa;
+      font-weight: 700;
+    }
+    @media (max-width: 768px) {
+      .admin-container {
+        grid-template-columns: 1fr;
+      }
+      .admin-sidebar {
+        padding: 1rem;
+      }
+      .admin-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body data-page="admin">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        🏗️ MAKIAS ADMINISTRATION
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="cart.html">View Cart</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Admin Panel Container -->
+  <div class="admin-container">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="admin-tabs">
+        <div class="admin-tab active" data-tab="analytics">📊 Analytics</div>
+        <div class="admin-tab" data-tab="products">📦 Products</div>
+        <div class="admin-tab" data-tab="orders">🛒 Orders</div>
+      </div>
+    </aside>
+
+    <!-- Main Dashboard Area -->
+    <main class="admin-main">
+      
+      <!-- Analytics Tab -->
+      <div id="analytics" class="admin-content active">
+        <h2>Dashboard Overview</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Real-time platform sales and operations analytics.</p>
+        
+        <div class="stats-grid">
+          <div class="stat-card" style="border-left-color: var(--primary-color);">
+            <h3>Total Revenue</h3>
+            <div class="stat-number" id="stat-revenue">0 XAF</div>
+          </div>
+          <div class="stat-card" style="border-left-color: var(--accent-color);">
+            <h3>Total Orders</h3>
+            <div class="stat-number" id="stat-orders">0</div>
+          </div>
+          <div class="stat-card" style="border-left-color: var(--success-color);">
+            <h3>Products Listed</h3>
+            <div class="stat-number" id="stat-products">0</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+          <div class="admin-card">
+            <h3>Recent Activity</h3>
+            <p style="color: var(--text-light);">System logs show normal customer orders and WhatsApp checkout operations.</p>
+          </div>
+          
+          <div class="admin-card">
+            <h3>Top Selling Products</h3>
+            <ul id="top-selling-list" style="list-style: none; padding: 0;">
+              <!-- Populated by script -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Inventory Tab -->
+      <div id="products" class="admin-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <h2>Inventory Management</h2>
+        </div>
+        <div class="admin-card" id="admin-products-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Orders Management Tab -->
+      <div id="orders" class="admin-content">
+        <h2>Customer Orders</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">View MTN Money/Orange Money and Cash On Delivery orders sent via WhatsApp.</p>
+        <div class="admin-card" id="admin-orders-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Tab switching override just to ensure classes are toggled correctly for display block/none
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.admin-tab');
+      const contents = document.querySelectorAll('.admin-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          tab.classList.add('active');
+          const target = tab.dataset.tab;
+          document.getElementById(target).classList.add('active');
+        });
+      });
+
+      // Render analytics after database loads
+      setTimeout(renderAnalytics, 150);
+    });
+
+    function renderAnalytics() {
+      if (typeof productManager === 'undefined' || typeof orderManager === 'undefined') return;
+
+      const products = productManager.getAll();
+      const orders = orderManager.getAllOrders();
+      
+      const totalProducts = products.length;
+      const totalOrders = orders.length;
+      const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+      
+      document.getElementById('stat-products').textContent = totalProducts;
+      document.getElementById('stat-orders').textContent = totalOrders;
+      document.getElementById('stat-revenue').textContent = Utils.formatPrice(totalRevenue);
+      
+      // Calculate top selling products
+      const productCounts = {};
+      orders.forEach(order => {
+        order.items.forEach(item => {
+          productCounts[item.name] = (productCounts[item.name] || 0) + item.quantity;
+        });
+      });
+      
+      const sortedProducts = Object.entries(productCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+        
+      const topList = document.getElementById('top-selling-list');
+      if (topList) {
+        if (sortedProducts.length === 0) {
+          topList.innerHTML = '<li>No sales recorded yet.</li>';
+        } else {
+          topList.innerHTML = sortedProducts.map(([name, qty]) => `
+            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <span>${name}</span>
+              <span style="font-weight: 600; color: var(--primary-color);">${qty} units</span>
+            </li>
+          `).join('');
+        }
+      }
+    }
+  </script>
+</body>
+</html>

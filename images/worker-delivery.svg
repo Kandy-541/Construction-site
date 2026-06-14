@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff" />
+      <stop offset="100%" stop-color="#f5f5f5" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4562a" />
+      <stop offset="100%" stop-color="#1a1a1a" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGrad)" stroke="#ddd" stroke-width="2" />
+  
+  <!-- Abstract Design Element -->
+  <path d="M 30,120 A 70,70 0 0,1 170,120 Z" fill="url(#primaryGrad)" opacity="0.1" />
+
+  <!-- Delivery Truck Silhouette in Background -->
+  <rect x="40" y="80" width="40" height="25" fill="#bdc3c7" opacity="0.5" />
+  <polygon points="80,80 95,92 95,105 80,105" fill="#bdc3c7" opacity="0.5" />
+  <circle cx="50" cy="110" r="6" fill="#7f8c8d" opacity="0.5" />
+  <circle cx="80" cy="110" r="6" fill="#7f8c8d" opacity="0.5" />
+
+  <!-- Worker Body (Carrying Box) -->
+  <path d="M 90,180 C 90,145 105,135 125,135 C 145,135 155,145 160,180 Z" fill="#2980b9" />
+  <!-- Cap -->
+  <circle cx="125" cy="110" r="18" fill="#f5cba7" />
+  <path d="M 108,100 C 108,85 142,85 142,100 Z" fill="#e74c3c" />
+  <!-- Cap bill -->
+  <path d="M 100,98 L 115,92 L 115,102 Z" fill="#c0392b" />
+  
+  <!-- Box -->
+  <rect x="70" y="125" width="45" height="40" rx="3" fill="#d35400" />
+  <!-- Tape on box -->
+  <rect x="70" y="142" width="45" height="6" fill="#e67e22" />
+  
+  <!-- Delivery Motion lines -->
+  <line x1="30" y1="90" x2="55" y2="90" stroke="#d4562a" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+  <line x1="20" y1="100" x2="40" y2="100" stroke="#d4562a" stroke-width="3" stroke-linecap="round" opacity="0.7" />
+  <line x1="35" y1="110" x2="50" y2="110" stroke="#d4562a" stroke-width="2" stroke-linecap="round" opacity="0.7" />
+</svg>

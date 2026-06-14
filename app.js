@@ -3,8 +3,8 @@
 // Configuration
 const CONFIG = {
   CURRENCY: 'XAF',
-  COMPANY_NAME: 'BuildCam Construction Materials',
-  WHATSAPP_NUMBER: '+237679748159',
+  COMPANY_NAME: 'MAKIAS CONSTRUCTION',
+  WHATSAPP_NUMBER: '+237672794019',
   DELIVERY_REGIONS: {
     'Yaoundé': 2000,
     'Douala': 2500,
@@ -26,18 +26,18 @@ const PRODUCTS_DB = [
     price: 3500,
     originalPrice: 3500,
     discount: 0,
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=500&h=500&fit=crop',
-    description: 'Premium quality Dangote cement for all construction needs',
+    image: 'images/dangote-cement.png',
+    description: 'High-strength Dangote Portland cement, ideal for all concrete construction works.',
     specifications: {
       weight: '50kg',
-      strength: '42.5N',
-      type: 'Portland Pozzolana Cement'
+      grade: '42.5R',
+      material: 'Portland Cement'
     },
     stock: 500,
-    sku: 'DANG-50-001',
+    sku: 'CEM-DANG-50KG',
     featured: true,
     rating: 4.8,
-    reviews: 120
+    reviews: 240
   },
   {
     id: 2,
@@ -46,78 +46,78 @@ const PRODUCTS_DB = [
     price: 3200,
     originalPrice: 3368,
     discount: 5,
-    image: 'https://images.unsplash.com/photo-1581092163562-40460bfda00a?w=500&h=500&fit=crop',
-    description: 'Cameroon-made high-quality cement',
+    image: 'images/cimencam-cement.png',
+    description: 'Premium Cameroon-made Cimencam cement, perfect for brick laying and plastering.',
     specifications: {
       weight: '50kg',
-      strength: '42.5N',
-      type: 'Portland Cement'
+      grade: '32.5R',
+      origin: 'Cameroon'
     },
     stock: 400,
-    sku: 'CIMEN-50-001',
+    sku: 'CEM-CIM-50KG',
     featured: true,
-    rating: 4.6,
-    reviews: 95
+    rating: 4.7,
+    reviews: 185
   },
   {
     id: 3,
-    name: 'Iron Rod 12mm x 12m',
-    category: 'Iron Rods',
-    price: 4500,
-    originalPrice: 4500,
-    discount: 0,
-    image: 'https://images.unsplash.com/photo-1513241556861-c3574b1f25ee?w=500&h=500&fit=crop',
-    description: 'High tensile strength reinforcing rod',
-    specifications: {
-      diameter: '12mm',
-      length: '12m',
-      tensile_strength: '460MPa'
-    },
-    stock: 250,
-    sku: 'ROD-12-001',
-    featured: true,
-    rating: 4.7,
-    reviews: 110
-  },
-  {
-    id: 4,
-    name: 'Iron Rod 16mm x 12m',
-    category: 'Iron Rods',
-    price: 8000,
-    originalPrice: 8000,
-    discount: 0,
-    image: 'https://images.unsplash.com/photo-1504917595217-3404ee9c6bf0?w=500&h=500&fit=crop',
-    description: 'Heavy-duty reinforcing rod for major projects',
-    specifications: {
-      diameter: '16mm',
-      length: '12m',
-      tensile_strength: '460MPa'
-    },
-    stock: 180,
-    sku: 'ROD-16-001',
-    featured: false,
-    rating: 4.9,
-    reviews: 105
-  },
-  {
-    id: 5,
-    name: 'Iron Rod 10mm x 12m',
+    name: 'Iron Rod 10mm',
     category: 'Iron Rods',
     price: 3200,
     originalPrice: 3555,
     discount: 10,
-    image: 'https://images.unsplash.com/photo-1541708258188-c4c91f1b3d1d?w=500&h=500&fit=crop',
-    description: 'Standard reinforcing rod',
+    image: 'images/iron-rod-10mm.png',
+    description: 'High tensile strength 10mm reinforcing steel rebar for concrete reinforcement.',
     specifications: {
       diameter: '10mm',
       length: '12m',
-      tensile_strength: '460MPa'
+      standard: 'FE500'
     },
-    stock: 320,
-    sku: 'ROD-10-001',
+    stock: 300,
+    sku: 'ROD-IRON-10MM',
+    featured: false,
+    rating: 4.6,
+    reviews: 95
+  },
+  {
+    id: 4,
+    name: 'Iron Rod 12mm',
+    category: 'Iron Rods',
+    price: 4500,
+    originalPrice: 4500,
+    discount: 0,
+    image: 'images/iron-rod-12mm.png',
+    description: 'Standard 12mm steel rebar for structural reinforcement in building construction.',
+    specifications: {
+      diameter: '12mm',
+      length: '12m',
+      standard: 'FE500'
+    },
+    stock: 250,
+    sku: 'ROD-IRON-12MM',
     featured: true,
-    rating: 4.5,
-    reviews: 88
+    rating: 4.8,
+    reviews: 150
+  },
+  {
+    id: 5,
+    name: 'Iron Rod 16mm',
+    category: 'Iron Rods',
+    price: 8000,
+    originalPrice: 8000,
+    discount: 0,
+    image: 'images/iron-rod-16mm.png',
+    description: 'Heavy-duty 16mm structural steel reinforcing bars for pillars and beams.',
+    specifications: {
+      diameter: '16mm',
+      length: '12m',
+      standard: 'FE500'
+    },
+    stock: 150,
+    sku: 'ROD-IRON-16MM',
+    featured: true,
+    rating: 4.9,
+    reviews: 112
   },
   {
     id: 6,
@@ -126,19 +126,18 @@ const PRODUCTS_DB = [
     price: 15000,
     originalPrice: 15000,
     discount: 0,
-    image: 'https://images.unsplash.com/photo-1605055831-a54b88e62c2f?w=500&h=500&fit=crop',
-    description: 'Lightweight and durable aluminum roofing',
+    image: 'images/aluminum-roofing.png',
+    description: 'Durable, lightweight aluminum roofing sheets, resistant to corrosion.',
     specifications: {
       material: 'Aluminum',
-      thickness: '0.5mm',
-      length: '8m',
-      width: '1m'
+      thickness: '0.4mm',
+      width: '0.75m'
     },
-    stock: 100,
-    sku: 'ROOF-ALU-001',
+    stock: 180,
+    sku: 'ROOF-ALUM-STD',
     featured: true,
-    rating: 4.4,
-    reviews: 67
+    rating: 4.7,
+    reviews: 88
   },
   {
     id: 7,
@@ -147,19 +146,18 @@ const PRODUCTS_DB = [
     price: 12000,
     originalPrice: 12000,
     discount: 0,
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&h=500&fit=crop',
-    description: 'Traditional zinc roofing with excellent durability',
+    image: 'images/zinc-roofing.svg',
+    description: 'Traditional zinc roofing sheets, cost-effective and highly durable.',
     specifications: {
-      material: 'Zinc',
-      thickness: '0.5mm',
-      length: '8m',
-      width: '1m'
+      material: 'Zinc-coated Steel',
+      thickness: '0.35mm',
+      length: '3m'
     },
-    stock: 150,
-    sku: 'ROOF-ZINC-001',
-    featured: true,
-    rating: 4.6,
-    reviews: 92
+    stock: 220,
+    sku: 'ROOF-ZINC-STD',
+    featured: false,
+    rating: 4.5,
+    reviews: 74
   },
   {
     id: 8,
@@ -168,57 +166,159 @@ const PRODUCTS_DB = [
     price: 25000,
     originalPrice: 29411,
     discount: 15,
-    image: 'https://images.unsplash.com/photo-1469022563149-aa64dbd37dae?w=500&h=500&fit=crop',
-    description: 'Premium roofing with stone coating for aesthetic appeal',
+    image: 'images/stone-coated-roofing.svg',
+    description: 'Luxury stone-coated steel roof tiles, fireproof and elegant.',
     specifications: {
       material: 'Stone-Coated Steel',
-      thickness: '0.6mm',
-      length: '8m',
-      width: '1m'
+      style: 'Bond Tile',
+      warranty: '50 Years'
     },
-    stock: 80,
-    sku: 'ROOF-STONE-001',
+    stock: 120,
+    sku: 'ROOF-STONE-PREM',
     featured: true,
-    rating: 4.8,
-    reviews: 145
+    rating: 4.9,
+    reviews: 63
   },
   {
     id: 9,
     name: 'Cement Bricks',
-    category: 'Construction Accessories',
+    category: 'Accessories',
     price: 5000,
     originalPrice: 5000,
     discount: 0,
-    image: 'https://images.unsplash.com/photo-1517578514434-278c237eed92?w=500&h=500&fit=crop',
-    description: 'Standard cement bricks for walls',
+    image: 'images/cement-bricks.svg',
+    description: 'High-quality compressed cement blocks for external and internal walls.',
     specifications: {
-      dimensions: '225x112x75mm',
-      quantity: '500 per unit'
+      dimensions: '15cm x 20cm x 40cm',
+      type: 'Hollow Block',
+      weight: '16kg'
     },
-    stock: 200,
-    sku: 'BRICK-001',
+    stock: 1000,
+    sku: 'ACC-BRICK-CEM',
     featured: false,
-    rating: 4.3,
-    reviews: 54
+    rating: 4.6,
+    reviews: 52
   },
   {
     id: 10,
     name: 'Nails Assorted Pack',
-    category: 'Construction Accessories',
+    category: 'Accessories',
     price: 1500,
-    originalPrice: 1578,
+    originalPrice: 1579,
     discount: 5,
-    image: 'https://images.unsplash.com/photo-1579177425435-5b1b7e50c39a?w=500&h=500&fit=crop',
-    description: 'Various sizes of nails for construction',
+    image: 'images/nails-pack.svg',
+    description: 'Assorted steel nails box containing various sizes for woodwork and concrete.',
     specifications: {
-      types: '2inch, 3inch, 4inch',
-      quantity: '2kg per pack'
+      weight: '2kg',
+      material: 'Carbon Steel',
+      sizes: '2 to 4 inches'
     },
-    stock: 400,
-    sku: 'NAILS-001',
+    stock: 350,
+    sku: 'ACC-NAILS-PK',
     featured: false,
-    rating: 4.2,
-    reviews: 41
+    rating: 4.4,
+    reviews: 40
+  },
+  {
+    id: 11,
+    name: 'Aluminum Glass Sliding Door',
+    category: 'Glass Work',
+    price: 150000,
+    originalPrice: 150000,
+    discount: 0,
+    image: 'images/WhatsApp Image 2026-06-14 at 5.25.36 PM.jpeg',
+    description: 'Modern aluminum glass sliding patio door with secure locking mechanism.',
+    specifications: {
+      material: 'Aluminum & Tempered Glass',
+      type: 'Sliding Door',
+      width: '1.8m',
+      height: '2.1m'
+    },
+    stock: 30,
+    sku: 'GLASS-SLIDE-DR',
+    featured: true,
+    rating: 4.8,
+    reviews: 45
+  },
+  {
+    id: 12,
+    name: 'Frosted Glass Office Partition',
+    category: 'Glass Work',
+    price: 250000,
+    originalPrice: 250000,
+    discount: 0,
+    image: 'images/WhatsApp Image 2026-06-14 at 5.25.35 PM.jpeg',
+    description: 'Frosted tempered glass partition wall for office spaces, providing privacy and natural light.',
+    specifications: {
+      material: 'Frosted Glass',
+      thickness: '10mm',
+      frame: 'Aluminum'
+    },
+    stock: 15,
+    sku: 'GLASS-OFF-PART',
+    featured: false,
+    rating: 4.9,
+    reviews: 18
+  },
+  {
+    id: 13,
+    name: 'Aluminum Kitchen Cabinet',
+    category: 'Glass Work',
+    price: 180000,
+    originalPrice: 180000,
+    discount: 0,
+    image: 'images/WhatsApp Image 2026-06-14 at 5.25.34 PM.jpeg',
+    description: 'Stylish, waterproof aluminum kitchen cabinet with glass panels and drawers.',
+    specifications: {
+      material: 'Aluminum & Tinted Glass',
+      style: 'L-shape',
+      compartments: '6'
+    },
+    stock: 25,
+    sku: 'GLASS-KIT-CAB',
+    featured: true,
+    rating: 4.7,
+    reviews: 31
+  },
+  {
+    id: 14,
+    name: 'Aluminum Security Kiosk',
+    category: 'Glass Work',
+    price: 350000,
+    originalPrice: 350000,
+    discount: 0,
+    image: 'images/WhatsApp Image 2026-06-14 at 5.25.35 PM (1).jpeg',
+    description: 'Prefabricated outdoor security guard booth with sliding glass windows.',
+    specifications: {
+      dimensions: '1.2m x 1.2m',
+      material: 'Aluminum & ACP panels',
+      roof: 'Waterproof insulated'
+    },
+    stock: 10,
+    sku: 'GLASS-SEC-KIOSK',
+    featured: false,
+    rating: 4.8,
+    reviews: 12
+  },
+  {
+    id: 15,
+    name: 'Glass & Wooden Pulpit (Podium)',
+    category: 'Glass Work',
+    price: 120000,
+    originalPrice: 120000,
+    discount: 0,
+    image: 'images/WhatsApp Image 2026-06-14 at 5.25.33 PM.jpeg',
+    description: 'Elegant, modern podium made from thick tempered glass and polished mahogany wood.',
+    specifications: {
+      material: 'Glass & Mahogany Wood',
+      height: '1.2m',
+      base: 'Stable timber base'
+    },
+    stock: 8,
+    sku: 'GLASS-PULPIT-POD',
+    featured: false,
+    rating: 4.9,
+    reviews: 22
   }
 ];
 
@@ -617,7 +717,9 @@ function renderCategories() {
   const categories = productManager.getCategories();
   container.innerHTML = categories.map(category => `
     <div class="category-card" onclick="window.location.href='products.html?category=${encodeURIComponent(category)}'">
-      <div class="category-card-icon">${getCategoryIcon(category)}</div>
+      <div class="category-card-image">
+        <img src="${getCategoryPhoto(category)}" alt="${category}" loading="lazy">
+      </div>
       <h3>${category}</h3>
       <p>${productManager.getByCategory(category).length} products</p>
     </div>
@@ -671,21 +773,33 @@ function setupFormHandlers() {
   }
 }
 
-function getCategoryIcon(category) {
-  const icons = {
-    'Cement': '🏭',
-    'Iron Rods': '🔧',
-    'Roofing Sheets': '🏠',
-    'Construction Accessories': '⚙️'
+function getCategoryPhoto(category) {
+  const photos = {
+    'Cement': 'images/dangote-cement.png',
+    'Iron Rods': 'images/iron-rod-12mm.png',
+    'Roofing Sheets': 'images/aluminum-roofing.png',
+    'Accessories': 'images/nails-pack.svg',
+    'Glass Work': 'images/WhatsApp Image 2026-06-14 at 5.25.36 PM.jpeg'
   };
-  return icons[category] || '📦';
+  return photos[category] || 'images/background-image.jpeg';
 }
 
 // ==================== PRODUCTS PAGE ====================
 
 function initializeProducts() {
   setupFilters();
-  renderAllProducts();
+  
+  // Parse category parameter from URL query string if present
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  
+  const categoryFilter = document.getElementById('category-filter');
+  if (categoryFilter && categoryParam) {
+    categoryFilter.value = categoryParam;
+    applyFilters();
+  } else {
+    renderAllProducts();
+  }
 }
 
 function setupFilters() {
@@ -761,7 +875,7 @@ function createProductCard(product) {
   return `
     <div class="product-card">
       <div class="product-image">
-        <img src="${product.image}" alt="${product.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
+        <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect fill=%22%23ddd%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2216%22 fill=%22%23999%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'">
         ${discountDisplay}
       </div>
       <div class="product-info">
@@ -1022,7 +1136,10 @@ function updateCartSummary() {
       <span>Total:</span>
       <span>${Utils.formatPrice(total)}</span>
     </div>
-    <button class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 1rem;" onclick="openWhatsAppCartModal()">
+    <button class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 0.5rem;" onclick="window.location.href='checkout.html'">
+      Proceed to Checkout
+    </button>
+    <button class="btn btn-outline btn-lg" style="width: 100%; margin-bottom: 0.5rem;" onclick="openWhatsAppCartModal()">
       💬 Chat with Admin on WhatsApp
     </button>
     <button class="btn btn-outline btn-lg" style="width: 100%;" onclick="window.location.href='products.html'">
@@ -1111,7 +1228,7 @@ function updateDeliveryFee() {
   const region = document.getElementById('region').value;
   const fee = Utils.getDeliveryFee(region);
   
-  const feeDisplay = document.getElementById('delivery-fee');
+  const feeDisplay = document.getElementById('checkout-delivery-fee');
   if (feeDisplay) {
     feeDisplay.textContent = Utils.formatPrice(fee);
     feeDisplay.dataset.fee = fee;
@@ -1138,7 +1255,7 @@ function renderCheckoutSummary() {
   container.innerHTML = html;
 
   const subtotal = cart.getSubtotal();
-  const deliveryFee = parseFloat(document.getElementById('delivery-fee')?.dataset.fee) || 0;
+  const deliveryFee = parseFloat(document.getElementById('checkout-delivery-fee')?.dataset.fee) || 0;
   const total = subtotal + deliveryFee;
 
   document.getElementById('checkout-subtotal').textContent = Utils.formatPrice(subtotal);
@@ -1147,7 +1264,7 @@ function renderCheckoutSummary() {
 
 function updateCheckoutSummary() {
   const subtotal = cart.getSubtotal();
-  const deliveryFee = parseFloat(document.getElementById('delivery-fee')?.dataset.fee) || 0;
+  const deliveryFee = parseFloat(document.getElementById('checkout-delivery-fee')?.dataset.fee) || 0;
   const total = subtotal + deliveryFee;
 
   document.getElementById('checkout-subtotal').textContent = Utils.formatPrice(subtotal);
@@ -1177,7 +1294,7 @@ function setupCheckoutForm() {
         city: formData.get('city'),
         orderNotes: formData.get('notes'),
         paymentMethod: formData.get('payment-method'),
-        deliveryFee: parseFloat(document.getElementById('delivery-fee')?.dataset.fee) || 0
+        deliveryFee: parseFloat(document.getElementById('checkout-delivery-fee')?.dataset.fee) || 0
       };
 
       // Create order

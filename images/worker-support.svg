@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff" />
+      <stop offset="100%" stop-color="#f5f5f5" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4562a" />
+      <stop offset="100%" stop-color="#1a1a1a" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#bgGrad)" stroke="#ddd" stroke-width="2" />
+  
+  <!-- Abstract Design Element -->
+  <path d="M 30,120 A 70,70 0 0,1 170,120 Z" fill="url(#primaryGrad)" opacity="0.1" />
+
+  <!-- Worker Body -->
+  <path d="M 60,180 C 60,140 75,130 100,130 C 125,130 140,140 140,180 Z" fill="#27ae60" />
+  
+  <!-- Neck -->
+  <rect x="92" y="115" width="16" height="15" fill="#f5cba7" />
+  
+  <!-- Head -->
+  <circle cx="100" cy="105" r="20" fill="#f5cba7" />
+  
+  <!-- Hard Hat -->
+  <path d="M 78,95 C 78,70 122,70 122,95 Z" fill="#f1c40f" />
+  <ellipse cx="100" cy="95" rx="26" ry="4" fill="#f1c40f" />
+  
+  <!-- Headset -->
+  <path d="M 83,105 A 17,17 0 0,1 117,105" fill="none" stroke="#2c3e50" stroke-width="3" />
+  <circle cx="82" cy="107" r="5" fill="#2c3e50" />
+  <circle cx="118" cy="107" r="5" fill="#2c3e50" />
+  <path d="M 118,107 L 105,118" fill="none" stroke="#2c3e50" stroke-width="2" />
+  <circle cx="103" cy="119" r="2" fill="#e74c3c" />
+
+  <!-- Speech bubble -->
+  <path d="M 40,75 C 40,60 55,50 75,50 C 95,50 110,60 110,75 C 110,85 100,95 85,95 L 80,105 L 75,95 C 55,95 40,85 40,75 Z" fill="#34495e" />
+  <text x="75" y="77" font-size="10" fill="#fff" text-anchor="middle" font-family="Arial, sans-serif">24/7 Support</text>
+</svg>

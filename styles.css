@@ -20,10 +20,12 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-dark);
   background-color: #fff;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -162,9 +164,8 @@ nav.navbar {
 /* ==================== HERO SECTION ==================== */
 
 .hero {
-  background: linear-gradient(135deg, var(--primary-color), #c1471f),
-              url('/images/construction-bg.jpg') center/cover;
-  background-blend-mode: overlay;
+  background: linear-gradient(135deg, rgba(212, 86, 42, 0.8), rgba(193, 71, 31, 0.8)),
+              url('images/background-image.jpeg') center/cover no-repeat;
   color: white;
   padding: 120px 20px;
   text-align: center;
@@ -328,9 +329,30 @@ section.light-bg {
   box-shadow: 0 8px 20px rgba(212, 86, 42, 0.2);
 }
 
-.category-card-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.category-card-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.category-card:hover .category-card-image {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.category-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .category-card h3 {
@@ -1132,5 +1154,185 @@ footer a:hover {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile products sidebar fix */
+  [style*="grid-template-columns: 250px 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==================== WHATSAPP CHAT BUTTON ==================== */
+
+.whatsapp-chat {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 999;
+  transition: var(--transition);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.whatsapp-chat::before {
+  content: '💬';
+  font-size: 1.2rem;
+}
+
+.whatsapp-chat:hover {
+  background: #128C7E;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* ==================== IMAGE OPTIMIZATIONS ==================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== LOADING ANIMATION ==================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.product-card {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.product-card:nth-child(2) { animation-delay: 0.1s; }
+.product-card:nth-child(3) { animation-delay: 0.2s; }
+.product-card:nth-child(4) { animation-delay: 0.3s; }
+.product-card:nth-child(5) { animation-delay: 0.4s; }
+.product-card:nth-child(6) { animation-delay: 0.5s; }
+
+/* ==================== ADMIN PANEL ==================== */
+
+.admin-container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+.admin-sidebar {
+  background: var(--secondary-color);
+  color: white;
+  padding: 2rem 1rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.admin-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-tab {
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ccc;
+}
+
+.admin-tab:hover, .admin-tab.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.admin-main {
+  padding: 2rem;
+  background: var(--light-gray);
+}
+
+.admin-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.admin-content.active {
+  display: block;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--primary-color);
+}
+
+.stat-card h3 {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--secondary-color);
+}
+
+.admin-card {
+  background: white;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.admin-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-card table th, .admin-card table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-card table th {
+  background: #f8f9fa;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .admin-sidebar {
+    padding: 1rem;
+  }
+  
+  .admin-tabs {
+    flex-direction: row;
+    overflow-x: auto;
   }
 }

@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5f5f5"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <!-- Nail shaft metallic gradient -->
+    <linearGradient id="nailShaft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b0b5ba"/>
+      <stop offset="15%" stop-color="#d8dce0"/>
+      <stop offset="30%" stop-color="#c0c5ca"/>
+      <stop offset="50%" stop-color="#e5e8eb"/>
+      <stop offset="70%" stop-color="#bcc1c6"/>
+      <stop offset="85%" stop-color="#d0d4d8"/>
+      <stop offset="100%" stop-color="#a8adb2"/>
+    </linearGradient>
+    <!-- Nail head gradient (top view) -->
+    <radialGradient id="nailHeadTop" cx="0.4" cy="0.35" r="0.6">
+      <stop offset="0%" stop-color="#e0e3e6"/>
+      <stop offset="40%" stop-color="#c8ccd0"/>
+      <stop offset="80%" stop-color="#a0a5aa"/>
+      <stop offset="100%" stop-color="#8a8f94"/>
+    </radialGradient>
+    <!-- Dark nail variant -->
+    <linearGradient id="nailShaftDark" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9a9fa4"/>
+      <stop offset="20%" stop-color="#c5cace"/>
+      <stop offset="45%" stop-color="#aeb3b8"/>
+      <stop offset="65%" stop-color="#d2d6da"/>
+      <stop offset="85%" stop-color="#b5babe"/>
+      <stop offset="100%" stop-color="#95999e"/>
+    </linearGradient>
+    <!-- Shadows -->
+    <filter id="nailShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <filter id="groupShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="5" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <filter id="groundShadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0"/>
+    </filter>
+    <!-- Steel texture -->
+    <filter id="steelTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="3" numOctaves="3" seed="7"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="soft-light"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="250" cy="430" rx="180" ry="20" filter="url(#groundShadow)" fill="#666"/>
+
+  <!-- ===== GROUPED NAILS (bundled, standing slightly angled) ===== -->
+  <g filter="url(#groupShadow)" transform="translate(80, 50)">
+    <!-- Large nail 1 - angled slightly left -->
+    <g transform="rotate(-5, 60, 200)">
+      <!-- Shaft -->
+      <rect x="57" y="80" width="6" height="280" rx="1" fill="url(#nailShaft)"/>
+      <!-- Point -->
+      <polygon points="57,360 63,360 60,378" fill="#a0a5aa"/>
+      <!-- Head -->
+      <ellipse cx="60" cy="80" rx="14" ry="5" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="60" cy="78" rx="14" ry="5" fill="#c8ccd0"/>
+      <!-- Head rim highlight -->
+      <ellipse cx="60" cy="78" rx="12" ry="3.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    </g>
+
+    <!-- Large nail 2 -->
+    <g transform="rotate(2, 85, 200)">
+      <rect x="82" y="85" width="6" height="275" rx="1" fill="url(#nailShaftDark)"/>
+      <polygon points="82,360 88,360 85,377" fill="#95999e"/>
+      <ellipse cx="85" cy="85" rx="14" ry="5" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="85" cy="83" rx="14" ry="5" fill="#ccd0d4"/>
+      <ellipse cx="85" cy="83" rx="12" ry="3.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    </g>
+
+    <!-- Large nail 3 -->
+    <g transform="rotate(-1, 110, 200)">
+      <rect x="107" y="82" width="6" height="278" rx="1" fill="url(#nailShaft)"/>
+      <polygon points="107,360 113,360 110,377" fill="#a0a5aa"/>
+      <ellipse cx="110" cy="82" rx="14" ry="5" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="110" cy="80" rx="14" ry="5" fill="#c5c9cd"/>
+      <ellipse cx="110" cy="80" rx="12" ry="3.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    </g>
+
+    <!-- Large nail 4 -->
+    <g transform="rotate(4, 135, 200)">
+      <rect x="132" y="88" width="6" height="270" rx="1" fill="url(#nailShaftDark)"/>
+      <polygon points="132,358 138,358 135,375" fill="#95999e"/>
+      <ellipse cx="135" cy="88" rx="14" ry="5" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="135" cy="86" rx="14" ry="5" fill="#c8ccd0"/>
+      <ellipse cx="135" cy="86" rx="12" ry="3.5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+    </g>
+  </g>
+
+  <!-- ===== MEDIUM NAILS (lying flat, angled) ===== -->
+  <g filter="url(#nailShadow)">
+    <!-- Medium nail 1 -->
+    <g transform="rotate(-25, 350, 280)">
+      <rect x="290" y="277" width="140" height="5" rx="1" fill="url(#nailShaft)"/>
+      <polygon points="430,277 430,282 442,279.5" fill="#a5aab0"/>
+      <ellipse cx="290" cy="279.5" rx="4" ry="10" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="288" cy="279.5" rx="4" ry="10" fill="#c5c9cd"/>
+    </g>
+
+    <!-- Medium nail 2 -->
+    <g transform="rotate(-15, 330, 320)">
+      <rect x="275" y="317" width="130" height="5" rx="1" fill="url(#nailShaftDark)"/>
+      <polygon points="405,317 405,322 417,319.5" fill="#999ea3"/>
+      <ellipse cx="275" cy="319.5" rx="4" ry="10" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="273" cy="319.5" rx="4" ry="10" fill="#c0c4c8"/>
+    </g>
+
+    <!-- Medium nail 3 -->
+    <g transform="rotate(-35, 370, 350)">
+      <rect x="310" y="347" width="120" height="4.5" rx="1" fill="url(#nailShaft)"/>
+      <polygon points="430,347 430,351.5 441,349.25" fill="#a5aab0"/>
+      <ellipse cx="310" cy="349.25" rx="3.5" ry="9" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <ellipse cx="308" cy="349.25" rx="3.5" ry="9" fill="#c8ccd0"/>
+    </g>
+  </g>
+
+  <!-- ===== SMALL SCATTERED NAILS ===== -->
+  <g filter="url(#nailShadow)">
+    <!-- Tiny nail 1 - horizontal -->
+    <g transform="rotate(10, 100, 400)">
+      <rect x="70" y="398" width="60" height="3" rx="0.5" fill="url(#nailShaftDark)"/>
+      <polygon points="130,398 130,401 137,399.5" fill="#999"/>
+      <ellipse cx="70" cy="399.5" rx="2.5" ry="6" fill="#bbb" stroke="#999" stroke-width="0.5"/>
+    </g>
+
+    <!-- Tiny nail 2 -->
+    <g transform="rotate(-40, 180, 420)">
+      <rect x="155" y="418" width="50" height="2.5" rx="0.5" fill="url(#nailShaft)"/>
+      <polygon points="205,418 205,420.5 211,419.25" fill="#a5a5a5"/>
+      <ellipse cx="155" cy="419.25" rx="2" ry="5" fill="#c0c0c0" stroke="#999" stroke-width="0.5"/>
+    </g>
+
+    <!-- Tiny nail 3 -->
+    <g transform="rotate(55, 420, 390)">
+      <rect x="400" y="388" width="45" height="2.5" rx="0.5" fill="url(#nailShaftDark)"/>
+      <polygon points="445,388 445,390.5 450,389.25" fill="#999"/>
+      <ellipse cx="400" cy="389.25" rx="2" ry="5" fill="#bbb" stroke="#999" stroke-width="0.5"/>
+    </g>
+
+    <!-- Tiny nail 4 (head-on view - just a circle) -->
+    <g transform="translate(340, 410)">
+      <ellipse cx="0" cy="0" rx="8" ry="8" fill="url(#nailHeadTop)" stroke="#888" stroke-width="0.5"/>
+      <circle cx="0" cy="0" r="2" fill="#777"/>
+      <ellipse cx="-1" cy="-1" rx="4" ry="3" fill="rgba(255,255,255,0.2)"/>
+    </g>
+
+    <!-- Tiny nail 5 -->
+    <g transform="rotate(-60, 270, 430)">
+      <rect x="248" y="428" width="55" height="2.5" rx="0.5" fill="url(#nailShaft)"/>
+      <polygon points="303,428 303,430.5 309,429.25" fill="#a5aab0"/>
+      <ellipse cx="248" cy="429.25" rx="2" ry="5.5" fill="#c0c4c8" stroke="#999" stroke-width="0.5"/>
+    </g>
+  </g>
+
+  <!-- ===== ADDITIONAL STANDING NAILS (behind the group) ===== -->
+  <g filter="url(#nailShadow)" opacity="0.6">
+    <g transform="rotate(-3, 250, 250)">
+      <rect x="247" y="120" width="5" height="240" rx="1" fill="url(#nailShaftDark)"/>
+      <polygon points="247,360 252,360 249.5,374" fill="#999"/>
+      <ellipse cx="249.5" cy="120" rx="12" ry="4.5" fill="#b8bcc0" stroke="#888" stroke-width="0.5"/>
+    </g>
+    <g transform="rotate(6, 280, 250)">
+      <rect x="277" y="135" width="5" height="225" rx="1" fill="url(#nailShaft)"/>
+      <polygon points="277,360 282,360 279.5,373" fill="#a0a5aa"/>
+      <ellipse cx="279.5" cy="135" rx="12" ry="4.5" fill="#c0c4c8" stroke="#888" stroke-width="0.5"/>
+    </g>
+  </g>
+
+  <!-- Specular highlights on main group -->
+  <line x1="142" y1="138" x2="145" y2="405" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" transform="rotate(4, 143, 250)"/>
+  <line x1="167" y1="132" x2="170" y2="410" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" transform="rotate(-1, 168, 250)"/>
+  <line x1="192" y1="135" x2="195" y2="407" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" transform="rotate(2, 193, 250)"/>
+</svg>

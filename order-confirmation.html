@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Order confirmation and next steps at MAKIAS CONSTRUCTION.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Order Confirmed - MAKIAS CONSTRUCTION</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .confirmation-box {
+      max-width: 600px;
+      margin: 4rem auto;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-top: 5px solid var(--success-color);
+    }
+    .check-icon {
+      font-size: 4rem;
+      color: var(--success-color);
+      margin-bottom: 1.5rem;
+    }
+    .ref-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      border: 1px dashed var(--border-color);
+    }
+    .instructions {
+      text-align: left;
+      margin: 2rem 0;
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+    .instructions h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+    }
+    .instructions ol {
+      padding-left: 1.2rem;
+    }
+    .instructions li {
+      margin-bottom: 0.8rem;
+    }
+  </style>
+</head>
+<body data-page="order-confirmation">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        🏗️ MAKIAS CONSTRUCTION
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="index.html#why-us">Why Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="cart.html" class="cart-icon">
+        🛒
+        <span class="cart-count" style="display: none;">0</span>
+      </a>
+      <div class="mobile-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <section style="background: var(--light-gray); min-height: calc(100vh - 300px); display: flex; align-items: center;">
+    <div class="container">
+      <div class="confirmation-box">
+        <div class="check-icon">✓</div>
+        <h1>Order Placed Successfully!</h1>
+        <p style="color: var(--text-light); font-size: 1.1rem;">Thank you for shopping with MAKIAS CONSTRUCTION.</p>
+        
+        <div>Order Reference:</div>
+        <div class="ref-badge" id="order-reference">ORD-XXXXXX</div>
+        
+        <div class="instructions">
+          <h3>What Happens Next?</h3>
+          <ol>
+            <li>You should have been redirected to WhatsApp with your auto-generated order message.</li>
+            <li>If the redirect didn't happen, please copy your Order Reference above and click the green button below to chat with us.</li>
+            <li>Our sales agent will confirm availability of materials, calculate final delivery cost, and coordinate your payment (MTN Mobile Money, Orange Money, or Bank Transfer).</li>
+            <li>Once confirmed, materials will be loaded and dispatched to your construction site.</li>
+          </ol>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;">
+          <a href="https://wa.me/237672794019" target="_blank" class="btn btn-primary" style="background: #25D366; border-color: #25D366;">
+            💬 Open WhatsApp Chat
+          </a>
+          <a href="products.html" class="btn btn-secondary">
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <h4>About MAKIAS CONSTRUCTION</h4>
+        <p>Cameroon's leading supplier of premium construction materials.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>📞 +237 672 794 019</li>
+          <li>📧 info@makiasconstruction.cm</li>
+          <li>📍 Buea, Cameroon</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 MAKIAS CONSTRUCTION. All rights reserved. 🇨🇲</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const reference = urlParams.get('reference');
+      if (reference) {
+        document.getElementById('order-reference').textContent = reference;
+      }
+    });
+  </script>
+</body>
+</html>

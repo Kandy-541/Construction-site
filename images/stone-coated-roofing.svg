@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5f5f5"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <!-- Terracotta/charcoal tile gradient -->
+    <linearGradient id="tileGrad1" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#5a3d35"/>
+      <stop offset="30%" stop-color="#6b4a40"/>
+      <stop offset="60%" stop-color="#4e332c"/>
+      <stop offset="100%" stop-color="#3d2822"/>
+    </linearGradient>
+    <linearGradient id="tileGrad2" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#4a3028"/>
+      <stop offset="40%" stop-color="#5e3f36"/>
+      <stop offset="70%" stop-color="#442d26"/>
+      <stop offset="100%" stop-color="#382420"/>
+    </linearGradient>
+    <linearGradient id="tileGrad3" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#634439"/>
+      <stop offset="35%" stop-color="#7a5548"/>
+      <stop offset="65%" stop-color="#56392f"/>
+      <stop offset="100%" stop-color="#4b3029"/>
+    </linearGradient>
+    <!-- Side edge gradient -->
+    <linearGradient id="sideGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d2822"/>
+      <stop offset="100%" stop-color="#2a1b16"/>
+    </linearGradient>
+    <!-- Stone granular texture -->
+    <filter id="stoneTexture" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="6" seed="5" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="1"/>
+      </feComponentTransfer>
+    </filter>
+    <filter id="stoneTexture2" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="5" seed="12" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="overlay"/>
+    </filter>
+    <!-- Shadow filters -->
+    <filter id="tileShadow" x="-5%" y="-5%" width="115%" height="130%">
+      <feDropShadow dx="2" dy="5" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+    <filter id="groundShadow" x="-10%" y="-10%" width="130%" height="140%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.2 0"/>
+    </filter>
+    <!-- Highlight for lip of tile -->
+    <linearGradient id="lipGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a5548"/>
+      <stop offset="50%" stop-color="#5a3a30"/>
+      <stop offset="100%" stop-color="#3d2520"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" fill="url(#bgGrad)"/>
+
+  <!-- Ground shadow -->
+  <ellipse cx="250" cy="430" rx="190" ry="30" filter="url(#groundShadow)" fill="#444"/>
+
+  <!-- === ROW 3 (back/top row) === -->
+  <g filter="url(#tileShadow)">
+    <!-- Tile 3a -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 80,150 L 200,150 L 200,210 C 190,225 170,230 160,228 C 140,224 130,218 120,222 C 110,226 100,220 80,215 Z" fill="url(#tileGrad3)"/>
+    </g>
+    <!-- Tile 3b -->
+    <g filter="url(#stoneTexture2)">
+      <path d="M 195,150 L 315,150 L 315,210 C 305,225 285,230 275,228 C 255,224 245,218 235,222 C 225,226 215,220 195,215 Z" fill="url(#tileGrad1)"/>
+    </g>
+    <!-- Tile 3c -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 310,150 L 430,150 L 430,210 C 420,225 400,230 390,228 C 370,224 360,218 350,222 C 340,226 330,220 310,215 Z" fill="url(#tileGrad2)"/>
+    </g>
+    <!-- Top edges -->
+    <rect x="80" y="146" width="120" height="5" fill="#7a5548" rx="1"/>
+    <rect x="195" y="146" width="120" height="5" fill="#6b4a40" rx="1"/>
+    <rect x="310" y="146" width="120" height="5" fill="#5e3f36" rx="1"/>
+  </g>
+
+  <!-- === ROW 2 (middle row, offset) === -->
+  <g filter="url(#tileShadow)">
+    <!-- Tile 2a -->
+    <g filter="url(#stoneTexture2)">
+      <path d="M 50,215 L 170,215 L 170,275 C 160,290 140,295 130,293 C 110,289 100,283 90,287 C 80,291 70,285 50,280 Z" fill="url(#tileGrad1)"/>
+    </g>
+    <!-- Tile 2b -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 165,215 L 285,215 L 285,275 C 275,290 255,295 245,293 C 225,289 215,283 205,287 C 195,291 185,285 165,280 Z" fill="url(#tileGrad2)"/>
+    </g>
+    <!-- Tile 2c -->
+    <g filter="url(#stoneTexture2)">
+      <path d="M 280,215 L 400,215 L 400,275 C 390,290 370,295 360,293 C 340,289 330,283 320,287 C 310,291 300,285 280,280 Z" fill="url(#tileGrad3)"/>
+    </g>
+    <!-- Tile 2d (partial) -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 395,215 L 460,215 L 460,275 C 450,290 440,285 430,287 C 420,291 410,285 395,280 Z" fill="url(#tileGrad1)"/>
+    </g>
+    <!-- Lip highlight strips -->
+    <rect x="50" y="211" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="165" y="211" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="280" y="211" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="395" y="211" width="65" height="5" fill="url(#lipGrad)" rx="1"/>
+  </g>
+
+  <!-- === ROW 1 (front row) === -->
+  <g filter="url(#tileShadow)">
+    <!-- Tile 1a -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 80,280 L 200,280 L 200,340 C 190,355 170,360 160,358 C 140,354 130,348 120,352 C 110,356 100,350 80,345 Z" fill="url(#tileGrad3)"/>
+    </g>
+    <!-- Tile 1b -->
+    <g filter="url(#stoneTexture2)">
+      <path d="M 195,280 L 315,280 L 315,340 C 305,355 285,360 275,358 C 255,354 245,348 235,352 C 225,356 215,350 195,345 Z" fill="url(#tileGrad1)"/>
+    </g>
+    <!-- Tile 1c -->
+    <g filter="url(#stoneTexture)">
+      <path d="M 310,280 L 430,280 L 430,340 C 420,355 400,360 390,358 C 370,354 360,348 350,352 C 340,356 330,350 310,345 Z" fill="url(#tileGrad2)"/>
+    </g>
+    <!-- Lip highlights -->
+    <rect x="80" y="276" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="195" y="276" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="310" y="276" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+  </g>
+
+  <!-- === ROW 0 (front-most, partial) === -->
+  <g filter="url(#tileShadow)">
+    <g filter="url(#stoneTexture2)">
+      <path d="M 50,345 L 170,345 L 170,405 C 160,420 140,425 130,423 C 110,419 100,413 90,417 C 80,421 70,415 50,410 Z" fill="url(#tileGrad2)"/>
+    </g>
+    <g filter="url(#stoneTexture)">
+      <path d="M 165,345 L 285,345 L 285,405 C 275,420 255,425 245,423 C 225,419 215,413 205,417 C 195,421 185,415 165,410 Z" fill="url(#tileGrad3)"/>
+    </g>
+    <g filter="url(#stoneTexture2)">
+      <path d="M 280,345 L 400,345 L 400,405 C 390,420 370,425 360,423 C 340,419 330,413 320,417 C 310,421 300,415 280,410 Z" fill="url(#tileGrad1)"/>
+    </g>
+    <g filter="url(#stoneTexture)">
+      <path d="M 395,345 L 460,345 L 460,405 C 450,420 440,415 430,417 C 420,421 410,415 395,410 Z" fill="url(#tileGrad2)"/>
+    </g>
+    <rect x="50" y="341" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="165" y="341" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="280" y="341" width="120" height="5" fill="url(#lipGrad)" rx="1"/>
+    <rect x="395" y="341" width="65" height="5" fill="url(#lipGrad)" rx="1"/>
+  </g>
+
+  <!-- Subtle specular highlights on some tiles -->
+  <path d="M 200,155 L 310,155 L 305,175 L 200,175 Z" fill="rgba(255,255,255,0.06)"/>
+  <path d="M 170,220 L 280,220 L 275,240 L 170,240 Z" fill="rgba(255,255,255,0.05)"/>
+</svg>
