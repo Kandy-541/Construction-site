@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Payment - MAKIAS CONSTRUCTION</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .payment-box {
+      max-width: 700px;
+      margin: 4rem auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .payment-card {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      background: var(--light-gray);
+    }
+    .payment-option {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-top: 0.9rem;
+      background: white;
+    }
+    .payment-option h4 {
+      margin: 0 0 0.4rem;
+      color: var(--secondary-color);
+    }
+    .payment-option p {
+      margin: 0.2rem 0;
+      color: var(--text-light);
+    }
+    .payment-radio {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    .payment-radio input {
+      margin-top: 0.25rem;
+    }
+    .payment-details {
+      margin-top: 0.8rem;
+      padding: 0.8rem 0.9rem;
+      background: var(--light-gray);
+      border-radius: 8px;
+      border: 1px dashed var(--border-color);
+    }
+    .payment-btn {
+      width: 100%;
+      margin-top: 1.2rem;
+    }
+  </style>
+</head>
+<body data-page="payment-gateway">
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">🏗️ MAKIAS CONSTRUCTION</div>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section style="background: var(--light-gray); min-height: calc(100vh - 180px); padding: 2rem 1rem;">
+    <div class="container">
+      <div class="payment-box">
+        <h1>Secure Payment</h1>
+        <p style="color: var(--text-light);">Your order is ready. Complete payment through our secure gateway to confirm your purchase.</p>
+
+        <div class="payment-card">
+          <h3>Order Summary</h3>
+          <p><strong>Reference:</strong> <span id="payment-reference">-</span></p>
+          <p><strong>Amount:</strong> <span id="payment-amount">0 XAF</span></p>
+        </div>
+
+        <div class="payment-card">
+          <h3>Select Payment Method</h3>
+          <div class="payment-option">
+            <label class="payment-radio">
+              <input type="radio" name="payment-method" value="mtn" checked>
+              <span>
+                <strong>MTN Mobile Money</strong><br>
+                <small>Pay instantly using your MTN number.</small>
+              </span>
+            </label>
+            <div class="payment-details" id="mtn-details">
+              <p><strong>MTN Number:</strong> +237 672 794 019</p>
+              <p><strong>Momo Name:</strong>Makia Christian</p>
+              <p>After payment, enter the transaction reference you receive from MTN.</p>
+              <input type="text" id="mtn-reference" placeholder="Enter MTN transaction reference" style="width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px; margin-top:0.5rem;">
+            </div>
+          </div>
+
+          <div class="payment-option">
+            <label class="payment-radio">
+              <input type="radio" name="payment-method" value="bank">
+              <span>
+                <strong>Bank Transfer</strong><br>
+                <small>Transfer to our business account.</small>
+              </span>
+            </label>
+            <div class="payment-details" id="bank-details" style="display:none;">
+              <p><strong>Account:</strong> 1002304567</p>
+              <p><strong>Bank:</strong> Standard Chartered Bank</p>
+              <p>Use your order reference as the transfer note.</p>
+              <input type="text" id="bank-reference" placeholder="Enter transfer reference" style="width:100%;padding:10px;border:1px solid var(--border-color);border-radius:6px; margin-top:0.5rem;">
+            </div>
+          </div>
+
+          <button class="btn btn-primary payment-btn" onclick="simulatePayment()">Complete Payment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const reference = params.get('reference') || 'ORD-000000';
+      const amount = params.get('amount') || '0';
+      document.getElementById('payment-reference').textContent = reference;
+      document.getElementById('payment-amount').textContent = `${Number(amount).toLocaleString('fr-FR')} XAF`;
+
+      document.querySelectorAll('input[name="payment-method"]').forEach((radio) => {
+        radio.addEventListener('change', togglePaymentDetails);
+      });
+
+      togglePaymentDetails();
+    });
+
+    function togglePaymentDetails() {
+      const selected = document.querySelector('input[name="payment-method"]:checked')?.value;
+      const mtnDetails = document.getElementById('mtn-details');
+      const bankDetails = document.getElementById('bank-details');
+
+      if (mtnDetails) mtnDetails.style.display = selected === 'mtn' ? 'block' : 'none';
+      if (bankDetails) bankDetails.style.display = selected === 'bank' ? 'block' : 'none';
+    }
+
+    function simulatePayment() {
+      const selected = document.querySelector('input[name="payment-method"]:checked')?.value || 'mtn';
+      const methodLabel = selected === 'bank' ? 'Bank Transfer' : 'MTN Mobile Money';
+      const noteField = selected === 'bank'
+        ? document.getElementById('bank-reference')
+        : document.getElementById('mtn-reference');
+      const note = noteField?.value?.trim() || 'Pending confirmation';
+
+      alert(`Payment initiated successfully via ${methodLabel}. Your order is now being confirmed.`);
+      window.location.href = 'order-confirmation.html?reference=' + encodeURIComponent(document.getElementById('payment-reference').textContent) + '&payment=' + encodeURIComponent(methodLabel) + '&note=' + encodeURIComponent(note);
+    }
+  </script>
+</body>
+</html>
