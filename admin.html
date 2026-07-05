@@ -83,6 +83,41 @@
       padding: 2rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .admin-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .admin-form-group label {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+    .admin-form-group input,
+    .admin-form-group textarea,
+    .admin-form-group select {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font: inherit;
+      box-sizing: border-box;
+    }
+    .admin-form-group textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+    .admin-form-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
     table th, table td {
       padding: 12px 15px;
       border-bottom: 1px solid var(--border-color);
@@ -174,6 +209,56 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
           <h2>Inventory Management</h2>
         </div>
+
+        <div class="admin-card" style="margin-bottom: 1.5rem;">
+          <h3>Add New Product</h3>
+          <p style="color: var(--text-light); margin-bottom: 0.5rem;">Add products directly here. They will appear in the store immediately.</p>
+          <form id="add-product-form">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label for="product-name">Product name</label>
+                <input id="product-name" name="product-name" type="text" required placeholder="e.g. Waterproof Paint">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-category">Category</label>
+                <input id="product-category" name="product-category" type="text" required placeholder="e.g. Paints">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-price">Price (XAF)</label>
+                <input id="product-price" name="product-price" type="number" min="0" step="100" required placeholder="25000">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-stock">Stock</label>
+                <input id="product-stock" name="product-stock" type="number" min="0" required placeholder="50">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-image">Image URL</label>
+                <input id="product-image" name="product-image" type="url" placeholder="https://example.com/image.jpg">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-sku">SKU (optional)</label>
+                <input id="product-sku" name="product-sku" type="text" placeholder="PAINT-001">
+              </div>
+              <div class="admin-form-group">
+                <label for="product-discount">Discount (%)</label>
+                <input id="product-discount" name="product-discount" type="number" min="0" max="100" placeholder="0">
+              </div>
+              <div class="admin-form-group" style="justify-content: center;">
+                <label for="product-featured">Featured product</label>
+                <input id="product-featured" name="product-featured" type="checkbox">
+              </div>
+            </div>
+            <div class="admin-form-group" style="margin-top: 1rem;">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" name="product-description" required placeholder="Describe the product clearly for customers."></textarea>
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-primary">Add Product</button>
+              <span style="color: var(--text-light); font-size: 0.95rem;">Products are saved on this browser for quick access.</span>
+            </div>
+          </form>
+        </div>
+
         <div class="admin-card" id="admin-products-list">
           <!-- Populated by JavaScript -->
         </div>

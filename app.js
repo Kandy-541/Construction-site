@@ -1,19 +1,18 @@
-// ==================== CONSTRUCTION MATERIALS E-COMMERCE APP ====================
+// ==================== MAKIAS CONSTRUCTION MATERIALS E-COMMERCE APP ====================
 
 // Configuration
 const CONFIG = {
   CURRENCY: 'XAF',
   COMPANY_NAME: 'MAKIAS CONSTRUCTION',
-  WHATSAPP_NUMBER: '+237672794019',
+  WHATSAPP_NUMBER: '+237 672 794 019',
   DELIVERY_REGIONS: {
-    'Yaoundé': 2000,
-    'Douala': 2500,
-    'Buea': 3000,
-    'Bamenda': 3500,
-    'Bafoussam': 3000,
-    'Yaounde': 2000,
-    'Kinshasa': 5000,
-    'Other': 4000
+    'CENTRAL': 2000,
+    'LITORAL': 2500,
+    'SOUTHWEST': 3000,
+    'NORTH': 3500,
+    'NORTHWEST': 3000,
+    'SOUTH': 4000,
+    'Other': 5000
   }
 };
 
@@ -418,8 +417,28 @@ class ShoppingCart {
 
 class ProductManager {
   constructor() {
-    this.products = PRODUCTS_DB;
+    this.products = this.loadProducts();
     this.filteredProducts = [...this.products];
+  }
+
+  loadProducts() {
+    const stored = localStorage.getItem('makiasProducts');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      } catch (error) {
+        console.warn('Unable to load saved products:', error);
+      }
+    }
+
+    return PRODUCTS_DB.map(product => ({ ...product }));
+  }
+
+  saveProducts() {
+    localStorage.setItem('makiasProducts', JSON.stringify(this.products));
   }
 
   getAll() {
@@ -485,11 +504,36 @@ class ProductManager {
     return [...new Set(this.products.map(p => p.category))];
   }
 
+  createProduct(productData) {
+    const newProduct = {
+      id: Date.now(),
+      name: productData.name.trim(),
+      category: productData.category.trim(),
+      price: Number(productData.price),
+      originalPrice: Number(productData.originalPrice || productData.price),
+      discount: Number(productData.discount || 0),
+      image: productData.image?.trim() || 'images/placeholder-product.png',
+      description: productData.description.trim(),
+      specifications: productData.specifications || {},
+      stock: Number(productData.stock),
+      sku: productData.sku?.trim() || `SKU-${Date.now()}`,
+      featured: Boolean(productData.featured),
+      rating: Number(productData.rating || 4.5),
+      reviews: Number(productData.reviews || 0)
+    };
+
+    this.products.unshift(newProduct);
+    this.filteredProducts = [...this.products];
+    this.saveProducts();
+    return newProduct;
+  }
+
   updatePrice(productId, newPrice) {
     const product = this.getById(productId);
     if (product) {
       product.originalPrice = product.price;
       product.price = newPrice;
+      this.saveProducts();
     }
   }
 
@@ -497,7 +541,19 @@ class ProductManager {
     const product = this.getById(productId);
     if (product) {
       product.stock = newStock;
+      this.saveProducts();
     }
+  }
+
+  deleteProduct(productId) {
+    const index = this.products.findIndex(p => p.id === productId);
+    if (index > -1) {
+      this.products.splice(index, 1);
+      this.filteredProducts = [...this.products];
+      this.saveProducts();
+      return true;
+    }
+    return false;
   }
 }
 
@@ -1300,23 +1356,16 @@ function setupCheckoutForm() {
       // Create order
       const order = orderManager.createOrder(data, cart.items);
 
-      // Generate WhatsApp message
-      const whatsAppMessage = orderManager.generateWhatsAppMessage(order);
-      const whatsAppUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${whatsAppMessage}`;
-
-      // Show confirmation and redirect to WhatsApp
-      alert(`Order ${order.reference} created successfully! You'll be redirected to WhatsApp.`);
+      // Show confirmation and redirect to secure payment gateway
+      alert(`Order ${order.reference} created successfully! Please complete payment in the secure gateway.`);
       
       // Clear cart
       cart.clear();
 
-      // Redirect to WhatsApp
-      window.open(whatsAppUrl, '_blank');
-
-      // Redirect to order confirmation
+      // Redirect to payment gateway flow
       setTimeout(() => {
-        window.location.href = `order-confirmation.html?reference=${order.reference}`;
-      }, 1000);
+        window.location.href = `payment-gateway.html?reference=${order.reference}&amount=${order.total}`;
+      }, 800);
     });
   }
 }
@@ -1325,8 +1374,47 @@ function setupCheckoutForm() {
 
 function initializeAdmin() {
   setupAdminTabs();
+  setupAdminProductForm();
   renderAdminProducts();
   renderAdminOrders();
+}
+
+function setupAdminProductForm() {
+  const form = document.getElementById('add-product-form');
+  if (!form) return;
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const payload = {
+      name: formData.get('product-name')?.toString().trim() || '',
+      category: formData.get('product-category')?.toString().trim() || '',
+      price: Number(formData.get('product-price')),
+      originalPrice: Number(formData.get('product-price')),
+      stock: Number(formData.get('product-stock')),
+      image: formData.get('product-image')?.toString().trim() || '',
+      description: formData.get('product-description')?.toString().trim() || '',
+      sku: formData.get('product-sku')?.toString().trim() || '',
+      discount: Number(formData.get('product-discount') || 0),
+      featured: formData.get('product-featured') === 'on',
+      rating: 4.5,
+      reviews: 0
+    };
+
+    if (!payload.name || !payload.category || !payload.description || Number.isNaN(payload.price) || Number.isNaN(payload.stock)) {
+      alert('Please complete the required product fields before adding a new item.');
+      return;
+    }
+
+    productManager.createProduct(payload);
+    this.reset();
+    renderAdminProducts();
+    if (typeof renderAnalytics === 'function') {
+      renderAnalytics();
+    }
+    alert('Product added successfully! It is now available in the store.');
+  });
 }
 
 function setupAdminTabs() {
@@ -1363,7 +1451,7 @@ function renderAdminProducts() {
         </tr>
       </thead>
       <tbody>
-        ${products.map(product => `
+        ${products.length === 0 ? `<tr><td colspan="5" style="padding: 1rem; color: var(--text-light);">No products yet. Add one using the form above.</td></tr>` : products.map(product => `
           <tr style="border-bottom: 1px solid var(--border-color);">
             <td style="padding: 1rem;">${product.name}</td>
             <td style="padding: 1rem;">${product.category}</td>
@@ -1440,10 +1528,12 @@ function editProduct(productId) {
 
 function deleteProduct(productId) {
   if (confirm('Are you sure you want to delete this product?')) {
-    const index = productManager.products.findIndex(p => p.id === productId);
-    if (index > -1) {
-      productManager.products.splice(index, 1);
+    const deleted = productManager.deleteProduct(productId);
+    if (deleted) {
       renderAdminProducts();
+      if (typeof renderAnalytics === 'function') {
+        renderAnalytics();
+      }
       alert('Product deleted!');
     }
   }
@@ -1540,7 +1630,7 @@ function sendCartToWhatsApp(customerInfo) {
   message += `\n*Order Summary:*\n`;
   message += `Subtotal: ${Utils.formatPrice(total)}\n`;
   message += `\nPlease confirm availability, calculate delivery fee for your location, and confirm payment method.\n`;
-  message += `\nThank you for choosing BuildCam! 🏗️`;
+  message += `\nThank you for choosing MAKIAS CONSTRUCTION! 🏗️`;
   
   // Encode and create WhatsApp URL
   const encodedMessage = encodeURIComponent(message);
@@ -1548,14 +1638,8 @@ function sendCartToWhatsApp(customerInfo) {
   
   // Close modal
   closeWhatsAppModal();
-  
-  // Clear cart
-  cart.clear();
-  
-  // Show notification
-  cart.showNotification('Redirecting to WhatsApp... 💬');
-  
-  // Redirect to WhatsApp
+
+    // Redirect to WhatsApp 
   setTimeout(() => {
     window.open(whatsAppUrl, '_blank');
     // Redirect to home after a short delay
@@ -1564,3 +1648,27 @@ function sendCartToWhatsApp(customerInfo) {
     }, 500);
   }, 500);
 }
+
+   // Encode and create Email URL
+  const encodedMessage = encodeURIComponent(message);
+  const emailUrl = `mailto:Christianmakia105@gmail.com?subject=Order%20Confirmation&body=${encodedMessage}`;
+  
+  // Close modal
+  closeEmailModal();
+  
+  // Clear cart
+  cart.clear();
+  
+  // Show notification
+  cart.showNotification('Redirecting to Email... �📧');
+  
+
+ // Redirect to Email
+  setTimeout(() => {
+    window.open(emailUrl, '_blank');
+    // Redirect to home after a short delay
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 500);
+  }, 500);
+
