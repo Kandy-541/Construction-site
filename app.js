@@ -16,6 +16,8 @@ const CONFIG = {
   }
 };
 
+const API_BASE = '/api';
+
 // Products Database (In production, this would come from backend API)
 const PRODUCTS_DB = [
   {
@@ -437,6 +439,22 @@ class ProductManager {
     return PRODUCTS_DB.map(product => ({ ...product }));
   }
 
+  async syncFromServer() {
+    try {
+      const response = await fetch(`${API_BASE}/products`);
+      if (!response.ok) throw new Error('Unable to load products');
+      const serverProducts = await response.json();
+      if (Array.isArray(serverProducts) && serverProducts.length > 0) {
+        this.products = serverProducts;
+        this.filteredProducts = [...this.products];
+        this.saveProducts();
+      }
+    } catch (error) {
+      console.warn('Using local product data:', error);
+    }
+    return this.products;
+  }
+
   saveProducts() {
     localStorage.setItem('makiasProducts', JSON.stringify(this.products));
   }
@@ -504,9 +522,8 @@ class ProductManager {
     return [...new Set(this.products.map(p => p.category))];
   }
 
-  createProduct(productData) {
-    const newProduct = {
-      id: Date.now(),
+  async createProduct(productData) {
+    const payload = {
       name: productData.name.trim(),
       category: productData.category.trim(),
       price: Number(productData.price),
@@ -522,38 +539,80 @@ class ProductManager {
       reviews: Number(productData.reviews || 0)
     };
 
-    this.products.unshift(newProduct);
-    this.filteredProducts = [...this.products];
+    try {
+      const response = await fetch(`${API_BASE}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('Unable to save product');
+      const newProduct = await response.json();
+      this.products.unshift(newProduct);
+      this.filteredProducts = [...this.products];
+      this.saveProducts();
+      return newProduct;
+    } catch (error) {
+      console.warn('Falling back to local update:', error);
+      const newProduct = { id: Date.now(), ...payload };
+      this.products.unshift(newProduct);
+      this.filteredProducts = [...this.products];
+      this.saveProducts();
+      return newProduct;
+    }
+  }
+
+  async updatePrice(productId, newPrice) {
+    const product = this.getById(productId);
+    if (!product) return;
+
+    product.originalPrice = product.price;
+    product.price = Number(newPrice);
     this.saveProducts();
-    return newProduct;
-  }
 
-  updatePrice(productId, newPrice) {
-    const product = this.getById(productId);
-    if (product) {
-      product.originalPrice = product.price;
-      product.price = Number(newPrice);
-      this.saveProducts();
+    try {
+      await fetch(`${API_BASE}/products/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ price: Number(newPrice) })
+      });
+    } catch (error) {
+      console.warn('Unable to sync price update:', error);
     }
   }
 
-  updateStock(productId, newStock) {
+  async updateStock(productId, newStock) {
     const product = this.getById(productId);
-    if (product) {
-      product.stock = Number(newStock);
-      this.saveProducts();
+    if (!product) return;
+
+    product.stock = Number(newStock);
+    this.saveProducts();
+
+    try {
+      await fetch(`${API_BASE}/products/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ stock: Number(newStock) })
+      });
+    } catch (error) {
+      console.warn('Unable to sync stock update:', error);
     }
   }
 
-  deleteProduct(productId) {
+  async deleteProduct(productId) {
     const index = this.products.findIndex(p => p.id === productId);
     if (index > -1) {
       this.products.splice(index, 1);
       this.filteredProducts = [...this.products];
       this.saveProducts();
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/products/${productId}`, { method: 'DELETE' });
+      return response.ok;
+    } catch (error) {
+      console.warn('Unable to sync delete action:', error);
       return true;
     }
-    return false;
   }
 }
 
@@ -695,9 +754,10 @@ const orderManager = new OrderManager();
 
 // ==================== INITIALIZATION ====================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   initializeNavbar();
   cart.updateCartCount();
+  await productManager.syncFromServer();
   initializePage();
 });
 
