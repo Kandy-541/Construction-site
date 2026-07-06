@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Dangote Cement 50kg",
+    "category": "Cement",
+    "price": 3500,
+    "originalPrice": 3500,
+    "discount": 0,
+    "image": "images/dangote-cement.png",
+    "description": "High-strength Dangote Portland cement, ideal for all concrete construction works.",
+    "specifications": {
+      "weight": "50kg",
+      "grade": "42.5R",
+      "material": "Portland Cement"
+    },
+    "stock": 500,
+    "sku": "CEM-DANG-50KG",
+    "featured": true,
+    "rating": 4.8,
+    "reviews": 240
+  }
+]

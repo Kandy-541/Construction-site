@@ -426,7 +426,7 @@ class ProductManager {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
+        if (Array.isArray(parsed)) {
           return parsed;
         }
       } catch (error) {
@@ -532,7 +532,7 @@ class ProductManager {
     const product = this.getById(productId);
     if (product) {
       product.originalPrice = product.price;
-      product.price = newPrice;
+      product.price = Number(newPrice);
       this.saveProducts();
     }
   }
@@ -540,7 +540,7 @@ class ProductManager {
   updateStock(productId, newStock) {
     const product = this.getById(productId);
     if (product) {
-      product.stock = newStock;
+      product.stock = Number(newStock);
       this.saveProducts();
     }
   }
@@ -583,7 +583,7 @@ class OrderManager {
     const order = {
       id: Date.now(),
       reference: this.generateOrderReference(),
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
       customer: data,
       items: cartItems,
       subtotal: cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0),
@@ -1383,17 +1383,24 @@ function setupAdminProductForm() {
   const form = document.getElementById('add-product-form');
   if (!form) return;
 
-  form.addEventListener('submit', function(event) {
+  form.addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const formData = new FormData(this);
+    const imageFile = document.getElementById('product-image-file')?.files?.[0];
+    let imageValue = formData.get('product-image')?.toString().trim() || '';
+
+    if (imageFile) {
+      imageValue = await readFileAsDataUrl(imageFile);
+    }
+
     const payload = {
       name: formData.get('product-name')?.toString().trim() || '',
       category: formData.get('product-category')?.toString().trim() || '',
       price: Number(formData.get('product-price')),
       originalPrice: Number(formData.get('product-price')),
       stock: Number(formData.get('product-stock')),
-      image: formData.get('product-image')?.toString().trim() || '',
+      image: imageValue,
       description: formData.get('product-description')?.toString().trim() || '',
       sku: formData.get('product-sku')?.toString().trim() || '',
       discount: Number(formData.get('product-discount') || 0),
@@ -1407,8 +1414,11 @@ function setupAdminProductForm() {
       return;
     }
 
-    productManager.createProduct(payload);
+    await productManager.createProduct(payload);
     this.reset();
+    if (document.getElementById('product-image-file')) {
+      document.getElementById('product-image-file').value = '';
+    }
     renderAdminProducts();
     if (typeof renderAnalytics === 'function') {
       renderAnalytics();
@@ -1509,26 +1519,26 @@ function renderAdminOrders() {
   `;
 }
 
-function editProduct(productId) {
+async function editProduct(productId) {
   const product = productManager.getById(productId);
   const newPrice = prompt(`Enter new price for ${product.name}:`, product.price);
   if (newPrice && !isNaN(newPrice)) {
-    productManager.updatePrice(productId, parseFloat(newPrice));
+    await productManager.updatePrice(productId, parseFloat(newPrice));
     renderAdminProducts();
     alert('Product price updated!');
   }
 
   const newStock = prompt(`Enter new stock for ${product.name}:`, product.stock);
   if (newStock && !isNaN(newStock)) {
-    productManager.updateStock(productId, parseInt(newStock));
+    await productManager.updateStock(productId, parseInt(newStock));
     renderAdminProducts();
     alert('Product stock updated!');
   }
 }
 
-function deleteProduct(productId) {
+async function deleteProduct(productId) {
   if (confirm('Are you sure you want to delete this product?')) {
-    const deleted = productManager.deleteProduct(productId);
+    const deleted = await productManager.deleteProduct(productId);
     if (deleted) {
       renderAdminProducts();
       if (typeof renderAnalytics === 'function') {
@@ -1537,6 +1547,15 @@ function deleteProduct(productId) {
       alert('Product deleted!');
     }
   }
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Unable to read selected image file'));
+    reader.readAsDataURL(file);
+  });
 }
 
 function openWhatsAppCartModal() {

@@ -236,6 +236,10 @@
                 <input id="product-image" name="product-image" type="url" placeholder="https://example.com/image.jpg">
               </div>
               <div class="admin-form-group">
+                <label for="product-image-file">Upload image</label>
+                <input id="product-image-file" name="product-image-file" type="file" accept="image/*">
+              </div>
+              <div class="admin-form-group">
                 <label for="product-sku">SKU (optional)</label>
                 <input id="product-sku" name="product-sku" type="text" placeholder="PAINT-001">
               </div>
@@ -254,7 +258,7 @@
             </div>
             <div class="admin-form-actions">
               <button type="submit" class="btn btn-primary">Add Product</button>
-              <span style="color: var(--text-light); font-size: 0.95rem;">Products are saved on this browser for quick access.</span>
+              <span style="color: var(--text-light); font-size: 0.95rem;">Products are saved in this browser for quick access.</span>
             </div>
           </form>
         </div>
